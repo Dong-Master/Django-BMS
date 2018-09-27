@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% block js %}
+    <!--Switchery [ OPTIONAL ]-->
+    <script src="/static/plugins/switchery/switchery.min.js"></script>
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <script src="/static/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+
+    <!--Bootstrap Tags Input [ OPTIONAL ]-->
+    <script src="/static/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+
+
+    <!--Chosen [ OPTIONAL ]-->
+    <script src="/static/plugins/chosen/chosen.jquery.min.js"></script>
+
+
+    <!--noUiSlider [ OPTIONAL ]-->
+    <script src="/static/plugins/noUiSlider/nouislider.min.js"></script>
+
+
+    <!--Select2 [ OPTIONAL ]-->
+    <script src="/static/plugins/select2/js/select2.min.js"></script>
+
+
+    <!--Bootstrap Timepicker [ OPTIONAL ]-->
+    <script src="/static/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+
+
+    <!--Bootstrap Datepicker [ OPTIONAL ]-->
+    <script src="/static/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+
+    <!--Form Component [ SAMPLE ]-->
+    <script src="/static/js/demo/form-component.js"></script>
+{% endblock %}
+
+{% block css %}
+    <!--Switchery [ OPTIONAL ]-->
+    <link href="/static/plugins/switchery/switchery.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="/static/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Tags Input [ OPTIONAL ]-->
+    <link href="/static/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.css" rel="stylesheet">
+
+
+    <!--Chosen [ OPTIONAL ]-->
+    <link href="/static/plugins/chosen/chosen.min.css" rel="stylesheet">
+
+
+    <!--noUiSlider [ OPTIONAL ]-->
+    <link href="/static/plugins/noUiSlider/nouislider.min.css" rel="stylesheet">
+
+
+    <!--Select2 [ OPTIONAL ]-->
+    <link href="/static/plugins/select2/css/select2.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Timepicker [ OPTIONAL ]-->
+    <link href="/static/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Datepicker [ OPTIONAL ]-->
+    <link href="/static/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    图书展示
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">图书信息</h3>
+                </div>
+
+                <!--Data Table-->
+                <!--===================================================-->
+                <div class="panel-body">
+                    <div class="pad-btm form-inline">
+                        <form action="{% url 'index' %}" method="get">
+                            <div class="row">
+                                <div class="col-sm-4 table-toolbar-left">
+                                    <select class="selectpicker" data-live-search="true" data-width="100%" name="type">
+                                        <option value="">类别选择(默认全部)</option>
+                                          {% for type in type_all %}
+                                            {% if is_type == type.id %}
+                                                <option value="{{ type.id }}" selected='selected'>{{ type.type_book }}</option>
+                                                {# type_book是type表中的字段名 #}
+                                            {% else %}
+                                                <option value="{{ type.id }}">{{ type.type_book }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-2 table-toolbar-right">
+                                    <!-- Bootstrap Select with Search Input -->
+                                    <!--===================================================-->
+                                    <div class="form-group">
+                                        <label class="col-lg-6 control-label">出版状态选择:</label>
+                                        <div class="col-sm-9">
+                                            <div class="radio">
+                                                <input id="demo-radio-7" class="magic-radio" type="radio" name="status"
+                                                       value="1" {% ifequal is_status 1 %}checked{% endifequal %}>
+                                                           {# ifequal判断后面的两个参数是否相同 #}
+                                                <label for="demo-radio-7">已出版</label>
+
+                                                <input id="demo-radio-8" class="magic-radio" type="radio" name="status"
+                                                       value="0" {% ifequal is_status 0 %}checked{% endifequal %}>
+                                                <label for="demo-radio-8">未出版</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--===================================================-->
+                                </div>
+
+                                <div class="col-sm-6 table-toolbar-right">
+                                    <div class="form-group">
+                                        <input type="text" autocomplete="off" class="form-control" placeholder="Search"
+                                               id="demo-input-search2" name="search"  value="{% ifequal search '' %}{% else %}{{ search }}{% endifequal %}">
+                                    </div>
+                                    <div class="btn-group">
+                                        <input type="submit" class="btn btn-default" value="搜索" >
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>图书名</th>
+                                <th>作者</th>
+                                <th>出版日期</th>
+                                <th>类别</th>
+                                <th class="text-center">出版状态</th>
+                                <th class="text-center">库存数量</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for book in book_obj %}
+                                <tr>
+                                    <td><a href="#" class="btn-link">{{ book.name }}</a></td>
+                                    <td>{% for author_name in book.author.all %}{{ author_name }},{% endfor %}
+                                    </td>
+                                    <td>
+                                        <span class="text-muted"><i class="fa fa-clock-o"></i>
+                                            {{ book.publish_year }}</span></td>
+                                    <td>{{ book.type }}</td>
+                                    {% if book.status %}
+                                        <td class="text-center">
+                                            <div class="label label-table label-success">
+                                                已出版
+                                            </div>
+                                        </td>
+                                    {% else %}
+                                        <td class="text-center">
+                                            <div class="label label-table label-danger">
+                                            未出版
+                                            </div>
+                                        </td>
+                                    {% endif %}
+                                    <td class="text-center">{{ book.stocks }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="pull-right">
+                        <ul class="pagination text-nowrap mar-no">
+                            {% if book_obj.has_previous %}
+                                <li class="page-pre disabled">
+                                    <a href="?page={{ book_obj.previous_page_number }}"><</a>
+                                </li>
+                            {% else %}
+                                <li class="page-pre disabled">
+                                    <a href="#"><</a>
+                                </li>
+                            {% endif %}
+                            {% for page in book_obj.paginator.page_range %}
+                                {% if book_obj.number == page %}
+                                    <li class="page-number active">
+                                        <a href="?page={{ page }}">{{ page }}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-number">
+                                        <a href="?page={{ page }}">{{ page }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if book_obj.has_next %}
+                                <li class="page-next">
+                                    <a href="?page={{ book_obj.next_page_number }}">></a>
+                                </li>
+                            {% else %}
+                                <li class="page-next disabled">
+                                    <a href="#">></a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <!--===================================================-->
+                <!--End Data Table-->
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

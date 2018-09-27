@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+
+{% block css %}
+
+
+    <!--Switchery [ OPTIONAL ]-->
+    <link href="/static/plugins/switchery/switchery.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="/static/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Tags Input [ OPTIONAL ]-->
+    <link href="/static/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.css" rel="stylesheet">
+
+
+    <!--Chosen [ OPTIONAL ]-->
+    <link href="/static/plugins/chosen/chosen.min.css" rel="stylesheet">
+
+
+    <!--noUiSlider [ OPTIONAL ]-->
+    <link href="/static/plugins/noUiSlider/nouislider.min.css" rel="stylesheet">
+
+
+    <!--Select2 [ OPTIONAL ]-->
+    <link href="/static/plugins/select2/css/select2.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Timepicker [ OPTIONAL ]-->
+    <link href="/static/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Datepicker [ OPTIONAL ]-->
+    <link href="/static/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+
+    <!--Magic Checkbox [ OPTIONAL ]-->
+    <link href="/static/plugins/magic-check/css/magic-check.min.css" rel="stylesheet">
+
+    <!--Bootstrap Datepicker [ OPTIONAL ]-->
+    <link href="/static/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+
+
+    <!--  Toastr_CSS -->
+    <link href="/static/js/toastr/toastr.min.css" rel="stylesheet">
+
+    <!-- Fileinput CSS -->
+
+    <link href="/static/fileinput/css/bootstrap-fileinput.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block js %}
+
+    <!--noUiSlider [ OPTIONAL ]-->
+    <script src="/static/plugins/noUiSlider/nouislider.min.js"></script>
+
+    <!--Switchery [ OPTIONAL ]-->
+    <script src="/static/plugins/switchery/switchery.min.js"></script>
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <script src="/static/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+
+    <!--Bootstrap Tags Input [ OPTIONAL ]-->
+    <script src="/static/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+
+
+    <!--Chosen [ OPTIONAL ]-->
+    <script src="/static/plugins/chosen/chosen.jquery.min.js"></script>
+
+
+    <!--Select2 [ OPTIONAL ]-->
+    <script src="/static/plugins/select2/js/select2.min.js"></script>
+
+
+
+    <!--Bootstrap Timepicker [ OPTIONAL ]-->
+    <script src="/static/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+
+
+    <!--Bootstrap Datepicker [ OPTIONAL ]-->
+    <script src="/static/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+
+    <!--Form Component [ SAMPLE ]-->
+    <script src="/static/js/demo/form-component.js"></script>
+
+
+    <script src="/static/myjs/modals.js"></script>
+
+    <!--Bootbox Modals [ OPTIONAL ]-->
+    <script src="/static/bootbox.min.js"></script>
+
+    <!--Form Component [ SAMPLE ]-->
+    <script src="/static/js/demo/form-component.js"></script>
+
+    <!--  Toastr_Js  -->
+    <script src="/static/js/toastr/toastr.js"></script>
+
+    <!-- Fileinput JS -->
+    <script src="/static/fileinput/js/bootstrap-fileinput.js"></script>
+
+
+{% endblock %}
+
+{% block content %}
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">图书编辑</h3>
+        </div>
+        <div class="panel-body demo-nifty-btn">
+            <form action="" class="panel-body form-horizontal form-padding"
+                  enctype="multipart/form-data" method="post" novalidate>      {#包含图片加上enctype参数#}
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">书名</label>
+                    <div class="col-md-5">
+                        {{ book_form.name }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">出版日期</label>
+                    <div class="col-md-5">
+                        {{ book_form.publish_year }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">价格</label>
+                    <div class="col-md-5">
+                        {{ book_form.price }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">库存</label>
+                    <div class="col-md-5">
+                        {{ book_form.stocks }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">作者</label>
+                    <div class="col-md-5">
+                        {{ book_form.author }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">出版状态</label>
+                    <div class="col-md-1">
+                        <div class="select">{{ book_form.status }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">类型选择</label>
+                    <div class="col-md-5">
+                        {{ book_form.type }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">出版社选择</label>
+                    <div class="col-md-5">
+                        {{ book_form.publisher }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">章节</label>
+                    <div class="col-md-5">
+                        {{ details_form.chapter }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">页数</label>
+                    <div class="col-md-5">
+                        {{ details_form.pages }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">字数</label>
+                    <div class="col-md-5">
+                        {{ details_form.words }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">内容简介</label>
+                    <div class="col-md-5">
+                        {{ details_form.contentinfo }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"
+                           for="demo-text-input">目录</label>
+                    <div class="col-md-5">
+                        {{ details_form.catalog }}
+                    </div>
+                </div>
+
+                <div class="form-group {% if detailsform.errors.logo %}has-error{% endif %}">
+                    <label class="col-md-3 control-label">图书封面</label>
+                    <div class="form-group col-md-5" id="uploadForm" enctype='multipart/form-data'>
+                        <div class="h4">图片预览</div>
+                        <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+
+                            <div class="fileinput-new thumbnail"
+                                 style="width: 200px;height: auto;max-height:150px;">
+                                {% if details.logo %}
+                                    <img src="{{ MEDIA_URL }}{{ details.logo }}" style="max-height: 140px;">
+                                {% else %}
+                                    <img src="/static/fileinput/images/noimage.png" style="max-height: 140px;">
+                                {% endif %}
+                            </div>
+
+                            <div class="fileinput-preview fileinput-exists thumbnail"
+                                 style="max-width: 200px; max-height: 150px;">
+                                <img src="{{ MEDIA_URL }}{{ details.logo }}" style="max-height: 140px;">
+                            </div>
+
+                            <div>
+                                {{ details_form.logo }}
+                                <a href="javascript:;" class="btn btn-danger fileinput-exists"
+                                   data-dismiss="fileinput">移除</a>
+                            </div>
+                            <div class="help-block">
+                                {% if detailsform.errors.logo %}{{ detailsform.errors.logo.0 }}{% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-7" style="left: 456px">
+                    <input class="btn btn-lg btn-success" type="submit" value="保存" id="book_edit">
+                    <button class="btn btn-lg btn-dark" type="button" id="redict_edit">返回</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        $("#book_edit").click(function () {
+            toastr.success("编辑成功！");
+        });
+        $("#redict_edit").click(function () {
+            window.location.href = '/managerbook/addbook/'
+        })
+    </script>
+{% endblock %}
